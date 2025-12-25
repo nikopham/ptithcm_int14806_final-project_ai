@@ -1,6 +1,6 @@
 [phases.setup]
 
-nixPkgs = ["python310", "gcc", "gnumake", "stdenv"]
+nixPkgs = ["python311", "gcc", "gnumake", "stdenv"]
 
 [phases.install]
 dependsOn = ["setup"]
