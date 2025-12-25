@@ -1,0 +1,14 @@
+setuptools
+wheel
+numpy<1.24
+scikit-surprise
+scikit-learn
+pandas
+joblib
+fastapi
+torch
+transformers
+pydantic
+uvicorn
+python-multipart
+google-cloud-storage
