@@ -1,9 +1,25 @@
 [phases.setup]
-nixPkgs = ["python311", "gcc", "gnumake", "stdenv"]
+# 1. Cài Python 3.10
+# 2. Cài python310Packages.pip (Cài pip từ kho Nix)
+# 3. Cài gcc và gnumake (Để biên dịch thư viện AI cũ)
+nixPkgs = ["python310", "python310Packages.pip", "gcc", "gnumake", "stdenv"]
 
 [phases.install]
+dependsOn = ["setup"]
 cmds = [
+    # --- QUAN TRỌNG: Kích hoạt PIP nếu nó chưa chạy ---
+    "python -m ensurepip --upgrade",
+
+    # Cập nhật công cụ build
     "python -m pip install --upgrade pip setuptools wheel",
+
+    # Cài Numpy bản cũ RIÊNG RA TRƯỚC (để tránh xung đột)
     "python -m pip install 'numpy<1.24'",
+
+    # Cài các thư viện còn lại
     "python -m pip install -r requirements.txt"
 ]
+
+[start]
+# Lệnh khởi động server (Đảm bảo đúng tên file main.py và biến app)
+cmd = "uvicorn main:app --host 0.0.0.0 --port $PORT"
