@@ -2,4 +2,8 @@
 nixPkgs = ["python310", "gcc", "gnumake", "stdenv"]
 
 [phases.install]
-cmds = ["python -m pip install 'numpy<1.24'", "python -m pip install -r requirements.txt"]
+cmds = [
+    "python -m pip install --upgrade pip setuptools wheel",
+    "python -m pip install 'numpy<1.24'",
+    "python -m pip install -r requirements.txt"
+]
